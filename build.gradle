@@ -1,0 +1,80 @@
+ext{
+    versions = [:]
+    libraries = [:]
+}
+
+versions.robovm = "2.3.7"
+versions.jlayer = "1.0.1-gdx"
+versions.jorbis = "0.0.17"
+versions.junit = "4.11"
+versions.androidPlugin = "3.4.0"
+versions.androidSdk = 28
+versions.androidBuildTools = "28.0.3"
+versions.teavm = '0.6.1'
+versions.reflections = '0.9.11'
+
+libraries.robovm = [
+    "com.mobidevelop.robovm:robovm-rt:${versions.robovm}",
+    "com.mobidevelop.robovm:robovm-objc:${versions.robovm}",
+    "com.mobidevelop.robovm:robovm-cocoatouch:${versions.robovm}"
+]
+
+libraries.sdl = [
+    "com.badlogicgames.jlayer:jlayer:${versions.jlayer}",
+    "org.jcraft:jorbis:${versions.jorbis}"
+]
+
+libraries.junit = [
+    "junit:junit:${versions.junit}"
+]
+
+libraries.teavm = [
+     "org.teavm:teavm-core:$versions.teavm",
+     "org.teavm:teavm-classlib:$versions.teavm",
+     "org.teavm:teavm-jso:$versions.teavm",
+     "org.teavm:teavm-jso-apis:$versions.teavm",
+     "org.teavm:teavm-jso-impl:$versions.teavm",
+     "org.reflections:reflections:$versions.reflections"
+]
+
+allprojects{
+    group = 'com.github.Anuken'
+    version = '1.0'
+
+    buildscript{
+        repositories{
+            mavenCentral()
+            jcenter()
+            maven{ url "https://oss.sonatype.org/content/repositories/snapshots/" }
+            google()
+        }
+    }
+
+    repositories{
+        mavenCentral()
+        jcenter()
+        maven{ url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven{ url "https://dl.bintray.com/konsoletyper/teavm" }
+        google()
+    }
+
+    ext.aproj = { String module ->
+        if(findProject(module) != null){
+            return project(module)
+        }else{
+            return project(":Arc" + module)
+        }
+    }
+}
+
+subprojects{
+    apply plugin: "java"
+
+    compileJava{
+        options.fork = true
+        options.incremental = true
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}

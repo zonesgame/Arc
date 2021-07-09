@@ -1,0 +1,60 @@
+# Temporary Files
+*~
+.*.swp
+.DS_STORE
+desktop.ini
+robovm-build/
+project.xcworkspace/
+xcuserdata/
+xcode/native/
+.gradle/
+build/
+bin/
+target/
+obj/
+out/
+classes/
+war/
+gen/
+gen-external-apklibs/
+armeabi/
+armeabi-v7a/
+arm64-v8a/
+ios32/
+Debug/
+Release/
+x64/
+x86/
+x86_64/
+robovm-build/
+ipch/
+/dist
+
+#maven sucks
+pom.xml
+
+*.a
+*.a.tvos
+*.dll.mdb
+*.userprefs
+*.sdf
+*.class
+hs_err_pid*
+Thumbs.db
+
+arc-*.zip
+arc-*.zip.MD5
+
+*.iml
+/.idea/
+
+#core & extension libs/ folders that have no 3rd party dependencies in them
+/backends/arc-backend-robovm/libs/
+/extensions/arc-freetype/libs/
+/backends/backend-sdl/jni
+
+#directories created by fetch.xml
+/tmp/
+
+#gradle wrapper
+/local.properties

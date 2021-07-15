@@ -14,6 +14,7 @@ import arc.scene.style.*;
 import arc.scene.ui.Label.*;
 import arc.scene.ui.layout.*;
 import arc.util.*;
+import arc.z.util.ZonesAnnotate.ZAdd;
 
 import static arc.Core.scene;
 
@@ -403,6 +404,22 @@ public class Dialog extends Table{
 
     public void addCloseButton(){
         //no default implementation; should be implemented by subclasses
+    }
+
+    @ZAdd
+    public void closeOnBack() {
+        closeOnBack(() -> {});
+    }
+
+    @ZAdd
+    public void closeOnBack(Runnable callback) {
+        keyDown( key -> {
+            if(key == KeyCode.ESCAPE || key == KeyCode.BACK){
+                Core.app.post(this::hide);
+                System.out.println("hide group .....  " + getName());
+                callback.run();
+            }
+        });
     }
 
     public boolean isShown(){

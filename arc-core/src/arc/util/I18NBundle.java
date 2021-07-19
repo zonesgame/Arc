@@ -10,6 +10,7 @@ import arc.files.Fi;
 import arc.struct.ObjectMap;
 import arc.util.io.PropertiesUtils;
 import arc.util.io.Streams;
+import arc.z.util.ZonesAnnotate;
 
 /**
  * A {@code I18NBundle} provides {@code Locale}-specific resources loaded from property files. A bundle contains a number of named
@@ -490,5 +491,10 @@ public class I18NBundle{
     /** @return the parent bundle. */
     public I18NBundle getParent(){
         return parent;
+    }
+
+    @ZonesAnnotate.ZAdd
+    public String formatValue(String value, Object... args){
+        return formatter.format(value, args);
     }
 }
